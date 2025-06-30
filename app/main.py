@@ -23,7 +23,7 @@ class URLResponse(BaseModel):
 @app.post("/shorten", response_model=URLResponse)
 def shorten_url(request: URLRequest, db: Session=Depends(get_db)):
     short_code = generate_short_code()
-    db_url = ShortURL(short_code=short_code, original_url=request.long_url)
+    db_url = ShortURL(short_code=short_code, original_url=str(request.long_url))
     db.add(db_url)
     db.commit()
     db.refresh(db_url)

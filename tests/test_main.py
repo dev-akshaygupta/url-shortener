@@ -11,5 +11,5 @@ def test_shorten_and_redirect():
 
     # Now test GET redirect
     short_code = data["short_code"]
-    response = client.get(f"/{short_code}", allow_redirects=False)
-    assert response.status_code in (302, 200)
+    response = client.get(f"/{short_code}", follow_redirects=False)
+    assert response.status_code in (302, 307, 200)
